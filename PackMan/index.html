@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Jeu</title>
+</head>
+<body>
+    <div id="start-screen">
+        Préparez-vous ! Le jeu commence bientôt...
+    </div>
+    
+    <canvas id="monCanvas" width="1500" height="600" style="display:none;"></canvas>
+    
+    <button id="back-to-menu">Retour au menu</button>
+
+    <label for="score" id="score">Score = 0</label>
+    <input type="text" id="essaie" value="False" style="font-size: 50px;">
+    <input type="text" id="victory" value="False" style="font-size: 50px;">
+
+    <script src="js/appC2.js" type="module"></script>
+
+    <script>
+        document.getElementById('back-to-menu').addEventListener('click', () => {
+            window.location.href = 'menu.html'; // Redirige vers le fichier menu.html
+        });
+    </script>
+</body>
+</html>

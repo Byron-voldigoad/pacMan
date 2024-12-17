@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Menu</title>
+</head>
+<body>
+    <div id="main-menu" class="menu">
+        <h1>Pac-Man</h1>
+        <button class="transparent-button" id="play-button">Jouer</button>
+        <button class="transparent-button" id="rules-button">Règles</button>
+        <button class="transparent-button" id="settings-button">Options</button>
+        <button class="transparent-button" id="quit-button">Quitter</button>
+    </div>
+
+    <!-- Modale pour les règles -->
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <h2>Règles du jeu</h2>
+            <ul>
+                <li>Utilisez les touches fléchées pour déplacer Pac-Man.</li>
+                <li>Mangez toutes les pac-gommes pour avancer.</li>
+                <li>Évitez les fantômes ou vous perdez une vie.</li>
+                <li>Gagnez des points en mangeant les pac-gommes.</li>
+            </ul>
+            <button id="close-rules">Fermer</button>
+        </div>
+    </div>
+    <script>
+        // Ouvrir le modale des règles
+        document.getElementById('rules-button').addEventListener('click', () => {
+            document.getElementById('rules-modal').style.display = 'flex'; // Affiche le modale
+        });
+
+        // Fermer le modale des règles
+        document.getElementById('close-rules').addEventListener('click', () => {
+            document.getElementById('rules-modal').style.display = 'none'; // Cache le modale
+        });
+    </script>
+
+    <style>
+        /* Style du modale */
+        .modal {
+            display: none; /* Masqué par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Fond plus sombre */
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff; /* Fond blanc pour plus de lisibilité */
+            padding: 60px; /* Plus d'espace autour du contenu */
+            border-radius: 15px; /* Bords arrondis plus marqués */
+            width: 80%;  /* Largeur réduite mais ample */
+            max-width: 900px; /* Largeur maximale un peu plus grande */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); /* Ombre plus marquée */
+            text-align: center;
+        }
+
+        .modal h2 {
+            font-size: 3.5rem; /* Augmentation de la taille du titre */
+            color: #333; /* Couleur douce */
+            margin-bottom: 40px; /* Plus d'espace en dessous du titre */
+        }
+
+        .modal ul {
+            font-size: 2.3rem; /* Taille du texte plus grande */
+            line-height: 2.5;
+            color: #444; /* Couleur douce pour le texte */
+            margin-bottom: 40px;
+            text-align: left;
+            list-style-position: inside;
+        }
+
+        .modal button {
+            padding: 18px 30px; /* Bouton encore plus grand */
+            background-color: #4CAF50; /* Couleur douce pour le bouton */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.7rem; /* Taille du texte dans le bouton */
+        }
+
+        .modal button:hover {
+            background-color: #45a049; /* Couleur légèrement plus foncée au survol */
+        }
+    </style>
+
+    <script>
+        // Musique du menu
+        let menuMusic = new Audio('../audio/DAN_DA_DAN_Opening___Otonoke_by_Creepy_Nuts(256k).mp3');
+        menuMusic.loop = true;
+        menuMusic.play();
+
+        // Actions des boutons
+        document.getElementById('play-button').addEventListener('click', () => {
+            window.location.href = 'index.html'; // Redirige vers le fichier index.html
+        });
+
+        // document.getElementById('rules-button').addEventListener('click', () => {
+        //     alert('Les règles seront bientôt disponibles !');
+        // });
+
+        document.getElementById('settings-button').addEventListener('click', () => {
+            alert('Les options seront bientôt disponibles !');
+        });
+
+        document.getElementById('quit-button').addEventListener('click', () => {
+            window.close(); // Ferme l'onglet ou la fenêtre (ne fonctionne pas toujours sur les navigateurs modernes)
+        });
+    </script>
+</body>
+</html>
