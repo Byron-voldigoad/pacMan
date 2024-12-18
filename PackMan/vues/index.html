@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <title>Menu</title>
+</head>
+<body>
+    <div id="main-menu" class="menu">
+        <h1>Pac-Man</h1>
+        <button class="transparent-button" id="play-button">Jouer</button>
+        <button class="transparent-button" id="rules-button">Règles</button>
+        <button class="transparent-button" id="settings-button">Options</button>
+        <button class="transparent-button" id="quit-button">Quitter</button>
+    </div>
+
+    <!-- Modale pour les règles -->
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <h2>Règles du jeu</h2>
+            <ul>
+                <li>Utilisez les touches fléchées pour déplacer Pac-Man.</li>
+                <li>Mangez toutes les pac-gommes pour avancer.</li>
+                <li>Évitez les fantômes ou vous perdez une vie.</li>
+                <li>Gagnez des points en mangeant les pac-gommes.</li>
+            </ul>
+            <button id="close-rules">Fermer</button>
+        </div>
+    </div>
+    <script>
+        // Ouvrir le modale des règles
+        document.getElementById('rules-button').addEventListener('click', () => {
+            document.getElementById('rules-modal').style.display = 'flex'; // Affiche le modale
+        });
+
+        // Fermer le modale des règles
+        document.getElementById('close-rules').addEventListener('click', () => {
+            document.getElementById('rules-modal').style.display = 'none'; // Cache le modale
+        });
+    </script>
+
+
+    <script>
+
+        // Musique du menu
+        let menuMusic = new Audio('../assets/audio/DAN_DA_DAN_Opening___Otonoke_by_Creepy_Nuts(256k).mp3');
+        menuMusic.loop = true;
+        menuMusic.play();
+
+        // Actions des boutons
+        document.getElementById('play-button').addEventListener('click', () => {
+            window.location.href = 'game.html'; // Redirige vers le fichier index.html
+        });
+
+        // document.getElementById('rules-button').addEventListener('click', () => {
+        //     alert('Les règles seront bientôt disponibles !');
+        // });
+
+        document.getElementById('settings-button').addEventListener('click', () => {
+            alert('Les options seront bientôt disponibles !');
+        });
+
+        document.getElementById('quit-button').addEventListener('click', () => {
+            window.close(); // Ferme l'onglet ou la fenêtre (ne fonctionne pas toujours sur les navigateurs modernes)
+        });
+    </script>
+</body>
+</html>

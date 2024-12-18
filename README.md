@@ -4,37 +4,34 @@
 Structure du Projet : 
                         Pac-Man/
                         │
+                        ├── assets/
+                        |   ├── audio/
+                        |   │   └── contient l'ensemble des audio
+                        |   │
+                        |   ├── img/
+                        |   │   └── contient l'ensemble des images
+                        |   └── css/
+                        │       └── styles.css
+                        │ 
+                        ├── controllers/
+                        │   ├── pacmanController.js
+                        │   ├── fantomeController.js
                         │
-                        ├── audio/
-                        │   └── contient l'ensemble des audio
+                        ├── models/
+                        │   ├── labyrinthModel.js
+                        │   ├── pacmanModel.js
+                        │   └── fantomesModel.js
                         │
-                        ├── css/
-                        │   └── styles.css
+                        ├── vues/
+                        |   ├── index.html
+                        |   ├── Menu.html
+                        │   ├── labyrinthVue.js
+                        │   ├── pacmanVue.js
+                        │   └──  fantomeVue.js
                         │
-                        │
-                        ├── img/
-                        │   └── contient l'ensemble des images
-                        │
-                        ├── js/   
-                        │   ├── controllers/
-                        │   │   ├── pacmanController.js
-                        │   │   ├── fantomeController.js
-                        │   │
-                        │   ├── models/
-                        │   │   ├── labyrinthModel.js
-                        │   │   ├── pacmanModel.js
-                        │   │   └── fantomesModel.js
-                        │   │
-                        │   ├── vues/
-                        │   │   ├── labyrinthVue.js
-                        │   │   ├── pacmanVue.js
-                        │   │   └──  fantomeVue.js
-                        │   │
-                        │   └──app.js
+                        ├──app.js
                         │
                         │
-                        ├── index.html
-                        ├── Menu.html
                         └── README.md
 
 **Rôles des Dossiers et Fichiers
