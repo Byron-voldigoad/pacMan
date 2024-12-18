@@ -16,12 +16,14 @@
     <button id="back-to-menu">Retour au menu</button>
 
     <label for="score" id="score">Score = 0</label>
-    <input type="text" id="essaie" value="False" style="font-size: 50px;">
-    <input type="text" id="victory" value="False" style="font-size: 50px;">
+    <input type="hidden" id="essaie" value="False" style="font-size: 50px;">
+    <input type="hidden" id="victory" value="False" style="font-size: 50px;">
 
     <script src="js/appC2.js" type="module"></script>
 
     <script>
+        
+
         document.getElementById('back-to-menu').addEventListener('click', () => {
             window.location.href = 'menu.html'; // Redirige vers le fichier menu.html
         });

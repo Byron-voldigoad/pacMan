@@ -66,41 +66,61 @@ export function getRandomDirection() {
     overlay.appendChild(gameOverText);
     overlay.appendChild(restartText);
     document.body.appendChild(overlay);
-    // const gameOverSound = new Audio("../../audio/nani.mp3"); 
-    // gameOverSound.play();
+    const gameOverSound = new Audio("../../audio/nani.mp3"); 
+    gameOverSound.play();
     // Redirection vers le menu après 3 secondes
     setTimeout(() => {
       window.location.href = "menu.html";
     }, 3500);
   }
-const cellSize = 30;
-  function simulatePacmanDeath(ctx) {
-    // Dessiner un cercle rétréci pour simuler Pac-Man mourant
-    const pacmanPosition = pacman; // Assurez-vous d'avoir cette fonction
-    const centerX = pacmanPosition.col * cellSize + cellSize / 2;
-    const centerY = pacmanPosition.row * cellSize + cellSize / 2;
 
-    let radius = cellSize / 2;
-    const deathInterval = setInterval(() => {
-        ctx.clearRect(centerX - cellSize, centerY - cellSize, cellSize * 2, cellSize * 2);
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
-        ctx.fillStyle = "yellow";
-        ctx.fill();
-        radius -= 2; // Réduire le rayon progressivement
-        if (radius <= 0) {
-            clearInterval(deathInterval);
-        }
-    }, 50); // Animation rapide
+
+const cellSize = 30;
+let isPacmanDead = false; // Suivi de l'état de Pac-Man
+
+function simulatePacmanDeath(ctx) {
+  
+  const pacmanPosition = pacman; // Position actuelle de Pac-Man
+  const centerX = pacmanPosition.col * cellSize + cellSize / 2;
+  const centerY = pacmanPosition.row * cellSize + cellSize / 2;
+
+  let radius = cellSize / 2;
+
+  const deathInterval = setInterval(() => {
+      ctx.clearRect(centerX - cellSize, centerY - cellSize, cellSize * 2, cellSize * 2);
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      ctx.fillStyle = "yellow";
+      ctx.fill();
+      radius -= 2; // Réduire le rayon progressivement
+
+      if (radius <= 0) {
+          clearInterval(deathInterval); // Stopper l'animation
+      }
+  }, 50);
 }
 
 
-  function kill(ctx) {
+
+
+
+function kill(ctx) {
+    
+    // Vérifier si Pac-Man est déjà "mort" pour éviter plusieurs exécutions
+    if (isPacmanDead) return;
+
     if (checkCollisionWithGhosts(pacman, ghostPosition)) {
+
+      isPacmanDead = true; // Marquer Pac-Man comme mort
+      
         let countLive = live();
-        // Simuler la mort de Pac-Man
-        simulatePacmanDeath(ctx);
- 
+        
+        const deadinterval = setInterval(() => {
+          // Simuler la mort de Pac-Man
+            simulatePacmanDeath(ctx);
+        }, 500);
+        const gameOverSound = new Audio("../../audio/pacman_death.wav"); 
+        gameOverSound.play();
         // Ajouter un délai avant de réinitialiser les positions
         setTimeout(() => {
             resetPacmanPosition(); // Réinitialiser Pac-Man
@@ -114,13 +134,17 @@ const cellSize = 30;
             // Reprendre le jeu si le joueur a encore des vies
             if (countLive > 0) {
                 gameInterval = setInterval(() => {
-                    gameLoop(ctx);
+                  // startGhostMovement(ctx);
                 }, 100); // Reprendre le jeu avec une boucle d'intervalle
+                
             } else {
                 gameOver(ctx); // Appeler Game Over si le joueur n'a plus de vies
             }
+            isPacmanDead = false; // Marquer Pac-Man comme vivant
+            clearInterval(deadinterval)
         }, 3000); // Délai de 3 secondes
     }
+    
 }
 
   
@@ -171,6 +195,7 @@ const cellSize = 30;
   
       // Si on atteint Pac-Man, arrêter la recherche
       if (row === pacmanRow && col === pacmanCol) {
+         
         kill(ctx);
       };
   
@@ -526,10 +551,15 @@ export function ghostMoves(ctx){
     MoveGhostAwayGhost(ctx, possitionFantomeRose);
     MoveGhostAwayGhost(ctx, possitionFantomeOrange);
 } else {
-  dijkstraMoveRedGhost(ctx);
-  dijkstraMovePinkGhost(ctx);
-  MoveBlueGhost(ctx);
-  MoveOrangeGhost(ctx);
+  if (isPacmanDead){
+    console.log("pacman mort")
+  }else{
+    dijkstraMoveRedGhost(ctx);
+    dijkstraMovePinkGhost(ctx);
+    MoveBlueGhost(ctx);
+    MoveOrangeGhost(ctx);
+  }
+  
 }
 }
   
